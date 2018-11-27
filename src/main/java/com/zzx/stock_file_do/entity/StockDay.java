@@ -1,9 +1,11 @@
 package com.zzx.stock_file_do.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class StockDay {
-    private int uuid;
+    private Integer uuid;
 
     private String stock;
 
@@ -41,11 +43,13 @@ public class StockDay {
 
     private Float peRatio;
 
-    public int getUuid() {
+    List<StockDay> list=new ArrayList<>();
+
+    public Integer getUuid() {
         return uuid;
     }
 
-    public void setUuid(int uuid) {
+    public void setUuid(Integer uuid) {
         this.uuid = uuid;
     }
 
@@ -129,12 +133,12 @@ public class StockDay {
         this.close = close;
     }
 
-    public Double getTradingVolue() {
+    public Double getTradingValue() {
         return tradingValue;
     }
 
-    public void setTradingVolue(Double tradingVolue) {
-        this.tradingValue = tradingVolue;
+    public void setTradingValue(Double tradingValue) {
+        this.tradingValue = tradingValue;
     }
 
     public Double getTurnover() {

@@ -2,8 +2,10 @@ package com.zzx.stock_file_do.controller;
 
 import com.zzx.stock_file_do.dao.HistoryDao;
 import com.zzx.stock_file_do.dao.StockDao;
+import com.zzx.stock_file_do.entity.StockDay;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.FileInputStream;
@@ -63,5 +65,13 @@ public class StockController {
         }
         return arr;
 
+    }
+
+
+
+    @RequestMapping("/getTime")
+    public StockDay getTime(){
+       StockDay h=historyDao.getTime(855799);
+       return  h;
     }
 }

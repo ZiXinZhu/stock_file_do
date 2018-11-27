@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -21,11 +20,16 @@ public class HistoryController {
     @Scheduled(cron = "59 59 21 * * ?")
     public void history() throws InterruptedException {
 
-        ExecutorService executorService = Executors.newFixedThreadPool(14);
+        Thread thread = new Thread(historyCenter);
+        thread.start();
+
+        //多线程
+  /*      ExecutorService executorService = Executors.newFixedThreadPool(14);
         long time1 = System.currentTimeMillis();
 
-        for (int j = 0; j < 14; j++) {
+        for (int j = 0; j < 15; j++) {
             executorService.submit(historyCenter);
+
         }
 
         //主线程不等待子线程如上
@@ -40,7 +44,7 @@ public class HistoryController {
                 break;
             }
             Thread.sleep(20);//防止循环很多次
-        }
+        }*/
 
         //测试
 /*        StockDay stockDay = new StockDay();

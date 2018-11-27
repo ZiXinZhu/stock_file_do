@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <context id="context1" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!-- 数据库链接URL、用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://123.207.231.159:3306/quantity?useUnicode=true&amp;charaterEncoding=utf-8&amp;allowMultiQueries=true&amp;nullNamePatternMatchesAll=true&amp;nullCatalogMeansCurrent=true"
+                        userId="root"
+                        password="1161260131"/>
+        <!-- 生成模型(entity)的包名和位置 -->
+        <javaModelGenerator targetPackage="com.zzx.stock_file_do.entity" targetProject="src/main/java"/>
+        <!-- 生成的映射文件(xml)包名和位置 -->
+        <sqlMapGenerator targetPackage="resources.mappers" targetProject="src/main"/>
+        <!-- 生成DAO(.java)的包名和位置 -->
+        <javaClientGenerator targetPackage="com.zzx.stock_file_do.dao" targetProject="src/main/java" type="XMLMAPPER"/>
+        <!-- 要生成的那些表(更改tableName 和domainObjectName 就可以了) -->
+        <table schema="StockDaySz" tableName="stock_day_sz" domainObjectName="StockDaySz" modelType="flat"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false" enableSelectByPrimaryKey="true">
+        </table>
+    </context>
+
+
+</generatorConfiguration>

@@ -14,8 +14,7 @@ import java.util.List;
 @Mapper
 public interface HistoryDao {
 
-    @Insert("INSERT INTO stock_day (uuid,stock,stock_name,date,price,chg,chang,opening,high,low,close,trading_value," +
-            "turnover,tmv,cmv,amplitude,turnover_rate,pb_ratio,pe_ratio) values (#{uuid},#{stock},#{stockName},#{date}," +
+    @Insert("INSERT INTO stock_day (uuid,stock,stock_name,date,price,chg,chang,opening,high,low,close,trading_value,turnover,tmv,cmv,amplitude,turnover_rate,pb_ratio,pe_ratio) values (#{uuid},#{stock},#{stockName},#{date}," +
             "#{price},#{chg},#{chang},#{opening},#{high},#{low},#{close},#{tradingValue},#{turnover},#{tmv},#{cmv},#{amplitude}," +
             "#{turnoverRate},#{pbRatio},#{peRatio})")
     int history(
@@ -43,6 +42,6 @@ public interface HistoryDao {
 
     @Select("SELECT * from  stock_info where id=#{id} ")
     StockEntity getID(@Param("id") int id);
-    @Select("SELECT * from  stock_day where stock=#{stock} ")
-    List<StockDay> getTime(@Param("stock") String stock);
+    @Select("SELECT * from  stock_day where uuid=#{id} ")
+    StockDay getTime(@Param("id") int id);
 }
