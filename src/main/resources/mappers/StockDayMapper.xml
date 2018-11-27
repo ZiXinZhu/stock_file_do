@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zzx.stock_file_do.dao.StockDayMapper" >
+  <resultMap id="BaseResultMap" type="com.zzx.stock_file_do.entity.StockDay" >
+    <id column="uuid" property="uuid" jdbcType="INTEGER" />
+    <result column="stock" property="stock" jdbcType="VARCHAR" />
+    <result column="stock_name" property="stockName" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="TIMESTAMP" />
+    <result column="price" property="price" jdbcType="REAL" />
+    <result column="chg" property="chg" jdbcType="REAL" />
+    <result column="chang" property="chang" jdbcType="REAL" />
+    <result column="opening" property="opening" jdbcType="REAL" />
+    <result column="high" property="high" jdbcType="REAL" />
+    <result column="low" property="low" jdbcType="REAL" />
+    <result column="close" property="close" jdbcType="REAL" />
+    <result column="trading_value" property="tradingValue" jdbcType="DOUBLE" />
+    <result column="turnover" property="turnover" jdbcType="DOUBLE" />
+    <result column="tmv" property="tmv" jdbcType="DOUBLE" />
+    <result column="cmv" property="cmv" jdbcType="DOUBLE" />
+    <result column="amplitude" property="amplitude" jdbcType="REAL" />
+    <result column="turnover_rate" property="turnoverRate" jdbcType="REAL" />
+    <result column="pb_ratio" property="pbRatio" jdbcType="REAL" />
+    <result column="pe_ratio" property="peRatio" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    uuid, stock, stock_name, date, price, chg, chang, opening, high, low, close, trading_value, 
+    turnover, tmv, cmv, amplitude, turnover_rate, pb_ratio, pe_ratio
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from stock_day
+    where uuid = #{uuid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from stock_day
+    where uuid = #{uuid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zzx.stock_file_do.entity.StockDay" >
+    insert into stock_day (uuid, stock, stock_name, 
+      date, price, chg, chang, 
+      opening, high, low, close, 
+      trading_value, turnover, tmv, 
+      cmv, amplitude, turnover_rate, 
+      pb_ratio, pe_ratio)
+    values <foreach collection ="list" item="stock_day" separator =",">
+    (#{stock_day.uuid,jdbcType=INTEGER}, #{stock_day.stock,jdbcType=VARCHAR}, #{stock_day.stockName,jdbcType=VARCHAR},
+    #{stock_day.date,jdbcType=TIMESTAMP}, #{stock_day.price,jdbcType=REAL}, #{stock_day.chg,jdbcType=REAL}, #{stock_day.chang,jdbcType=REAL},
+    #{stock_day.opening,jdbcType=REAL}, #{stock_day.high,jdbcType=REAL}, #{stock_day.low,jdbcType=REAL}, #{stock_day.close,jdbcType=REAL},
+    #{stock_day.tradingValue,jdbcType=DOUBLE}, #{stock_day.turnover,jdbcType=DOUBLE}, #{stock_day.tmv,jdbcType=DOUBLE},
+    #{stock_day.cmv,jdbcType=DOUBLE}, #{stock_day.amplitude,jdbcType=REAL}, #{stock_day.turnoverRate,jdbcType=REAL},
+    #{stock_day.pbRatio,jdbcType=REAL}, #{stock_day.peRatio,jdbcType=REAL})
+  </foreach>
+  </insert>
+
+  <insert id="setsz" parameterType="com.zzx.stock_file_do.entity.StockDay" >
+    insert into stock_day_sz (uuid, stock, stock_name,
+    date, price, chg, chang,
+    opening, high, low, close,
+    trading_value, turnover, tmv,
+    cmv, amplitude, turnover_rate,
+    pb_ratio, pe_ratio)
+    values <foreach collection ="list" item="stock_day" separator =",">
+    (#{stock_day.uuid,jdbcType=INTEGER}, #{stock_day.stock,jdbcType=VARCHAR}, #{stock_day.stockName,jdbcType=VARCHAR},
+    #{stock_day.date,jdbcType=TIMESTAMP}, #{stock_day.price,jdbcType=REAL}, #{stock_day.chg,jdbcType=REAL}, #{stock_day.chang,jdbcType=REAL},
+    #{stock_day.opening,jdbcType=REAL}, #{stock_day.high,jdbcType=REAL}, #{stock_day.low,jdbcType=REAL}, #{stock_day.close,jdbcType=REAL},
+    #{stock_day.tradingValue,jdbcType=DOUBLE}, #{stock_day.turnover,jdbcType=DOUBLE}, #{stock_day.tmv,jdbcType=DOUBLE},
+    #{stock_day.cmv,jdbcType=DOUBLE}, #{stock_day.amplitude,jdbcType=REAL}, #{stock_day.turnoverRate,jdbcType=REAL},
+    #{stock_day.pbRatio,jdbcType=REAL}, #{stock_day.peRatio,jdbcType=REAL})
+  </foreach>
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.zzx.stock_file_do.entity.StockDay" >
+    insert into stock_day
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        uuid,
+      </if>
+      <if test="stock != null" >
+        stock,
+      </if>
+      <if test="stockName != null" >
+        stock_name,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="chg != null" >
+        chg,
+      </if>
+      <if test="chang != null" >
+        chang,
+      </if>
+      <if test="opening != null" >
+        opening,
+      </if>
+      <if test="high != null" >
+        high,
+      </if>
+      <if test="low != null" >
+        low,
+      </if>
+      <if test="close != null" >
+        close,
+      </if>
+      <if test="tradingValue != null" >
+        trading_value,
+      </if>
+      <if test="turnover != null" >
+        turnover,
+      </if>
+      <if test="tmv != null" >
+        tmv,
+      </if>
+      <if test="cmv != null" >
+        cmv,
+      </if>
+      <if test="amplitude != null" >
+        amplitude,
+      </if>
+      <if test="turnoverRate != null" >
+        turnover_rate,
+      </if>
+      <if test="pbRatio != null" >
+        pb_ratio,
+      </if>
+      <if test="peRatio != null" >
+        pe_ratio,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        #{uuid,jdbcType=INTEGER},
+      </if>
+      <if test="stock != null" >
+        #{stock,jdbcType=VARCHAR},
+      </if>
+      <if test="stockName != null" >
+        #{stockName,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="chg != null" >
+        #{chg,jdbcType=REAL},
+      </if>
+      <if test="chang != null" >
+        #{chang,jdbcType=REAL},
+      </if>
+      <if test="opening != null" >
+        #{opening,jdbcType=REAL},
+      </if>
+      <if test="high != null" >
+        #{high,jdbcType=REAL},
+      </if>
+      <if test="low != null" >
+        #{low,jdbcType=REAL},
+      </if>
+      <if test="close != null" >
+        #{close,jdbcType=REAL},
+      </if>
+      <if test="tradingValue != null" >
+        #{tradingValue,jdbcType=DOUBLE},
+      </if>
+      <if test="turnover != null" >
+        #{turnover,jdbcType=DOUBLE},
+      </if>
+      <if test="tmv != null" >
+        #{tmv,jdbcType=DOUBLE},
+      </if>
+      <if test="cmv != null" >
+        #{cmv,jdbcType=DOUBLE},
+      </if>
+      <if test="amplitude != null" >
+        #{amplitude,jdbcType=REAL},
+      </if>
+      <if test="turnoverRate != null" >
+        #{turnoverRate,jdbcType=REAL},
+      </if>
+      <if test="pbRatio != null" >
+        #{pbRatio,jdbcType=REAL},
+      </if>
+      <if test="peRatio != null" >
+        #{peRatio,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zzx.stock_file_do.entity.StockDay" >
+    update stock_day
+    <set >
+      <if test="stock != null" >
+        stock = #{stock,jdbcType=VARCHAR},
+      </if>
+      <if test="stockName != null" >
+        stock_name = #{stockName,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=REAL},
+      </if>
+      <if test="chg != null" >
+        chg = #{chg,jdbcType=REAL},
+      </if>
+      <if test="chang != null" >
+        chang = #{chang,jdbcType=REAL},
+      </if>
+      <if test="opening != null" >
+        opening = #{opening,jdbcType=REAL},
+      </if>
+      <if test="high != null" >
+        high = #{high,jdbcType=REAL},
+      </if>
+      <if test="low != null" >
+        low = #{low,jdbcType=REAL},
+      </if>
+      <if test="close != null" >
+        close = #{close,jdbcType=REAL},
+      </if>
+      <if test="tradingValue != null" >
+        trading_value = #{tradingValue,jdbcType=DOUBLE},
+      </if>
+      <if test="turnover != null" >
+        turnover = #{turnover,jdbcType=DOUBLE},
+      </if>
+      <if test="tmv != null" >
+        tmv = #{tmv,jdbcType=DOUBLE},
+      </if>
+      <if test="cmv != null" >
+        cmv = #{cmv,jdbcType=DOUBLE},
+      </if>
+      <if test="amplitude != null" >
+        amplitude = #{amplitude,jdbcType=REAL},
+      </if>
+      <if test="turnoverRate != null" >
+        turnover_rate = #{turnoverRate,jdbcType=REAL},
+      </if>
+      <if test="pbRatio != null" >
+        pb_ratio = #{pbRatio,jdbcType=REAL},
+      </if>
+      <if test="peRatio != null" >
+        pe_ratio = #{peRatio,jdbcType=REAL},
+      </if>
+    </set>
+    where uuid = #{uuid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zzx.stock_file_do.entity.StockDay" >
+    update stock_day
+    set stock = #{stock,jdbcType=VARCHAR},
+      stock_name = #{stockName,jdbcType=VARCHAR},
+      date = #{date,jdbcType=TIMESTAMP},
+      price = #{price,jdbcType=REAL},
+      chg = #{chg,jdbcType=REAL},
+      chang = #{chang,jdbcType=REAL},
+      opening = #{opening,jdbcType=REAL},
+      high = #{high,jdbcType=REAL},
+      low = #{low,jdbcType=REAL},
+      close = #{close,jdbcType=REAL},
+      trading_value = #{tradingValue,jdbcType=DOUBLE},
+      turnover = #{turnover,jdbcType=DOUBLE},
+      tmv = #{tmv,jdbcType=DOUBLE},
+      cmv = #{cmv,jdbcType=DOUBLE},
+      amplitude = #{amplitude,jdbcType=REAL},
+      turnover_rate = #{turnoverRate,jdbcType=REAL},
+      pb_ratio = #{pbRatio,jdbcType=REAL},
+      pe_ratio = #{peRatio,jdbcType=REAL}
+    where uuid = #{uuid,jdbcType=INTEGER}
+  </update>
+</mapper>
